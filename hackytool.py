@@ -23,7 +23,6 @@ confidence = 0
 url = ''
 url_request = ''
 url_socket = ''
-proxies = { 'http': 'socks5://127.0.0.1:9150', 'https': 'socks5://127.0.0.1:9150' }
 user_agent = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.116 Safari/537.36',}
 banner = ('''
                             by hackytool
@@ -39,12 +38,10 @@ os.system(COMMAND)
 cprint(banner, 'blue')
 cprint('-'*term_size.columns, 'blue')
 
-if args.proxy is None:
-        # Get the input from the user
-        proxies = input('Proxy to use : ')
-        cprint('-'*term_size.columns, 'blue')
+if args.proxy is not None:
+    proxies = { 'http': 'socks5://' + args.proxy, 'https': 'socks5://' + args.proxy } 
 else:
-    proxies = args.proxy
+    proxies = {}
 
 if args.url is None:
         # Get the input from the user
