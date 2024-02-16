@@ -9,7 +9,7 @@ import os
 parser = argparse.ArgumentParser()
 parser.add_argument("-u", "--url", help="Specify the URL you want to Check")
 parser.add_argument("-b", "--brute", help="Attempt to bruteforce interesting directories")
-parser.add_argument("-p", "--proxy", help="Use a proxy eg: IP:PORT")
+parser.add_argument("-p", "--proxy", nargs='?', help="Use a proxy eg: IP:PORT")
 args = parser.parse_args()
 
 ########################  GLOBALS  ########################
@@ -66,7 +66,7 @@ try:
     
     r = requests.get(url_request, allow_redirects=True, headers=user_agent, proxies=proxies)
     exit()
-    
+
     IP_addres = socket.gethostbyname(url_socket)
 
     cprint(f'[*] Checking: {url}...', 'yellow')
