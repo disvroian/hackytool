@@ -60,9 +60,19 @@ try:
     else:
         url_request = 'http://' + url    
         url_socket = url
-        
+
     response = requests.get('https://api.myip.com/', proxies=proxies)
     print(response.json())
+
+    file1 = open('myfile.txt', 'r')
+    Lines = file1.readlines()
+    for line in Lines:
+        response = requests.get('https://api.myip.com/', proxies=proxies)
+        if response.status_code == 200:
+            response2 = requests.get('https://api.myip.com/', proxies=proxies)
+            if response2.status_code == 200:
+                print("OK")
+        
     exit()
 
     r = requests.get(url_request, allow_redirects=True, headers=user_agent, proxies=proxies)
