@@ -60,10 +60,8 @@ try:
     else:
         url_request = 'http://' + url    
         url_socket = url
-    
-    r = requests.get(url_request, allow_redirects=True, headers=user_agent, proxies=proxies)
-    exit()
 
+    r = requests.get(url_request, allow_redirects=True, headers=user_agent, proxies=proxies)
     IP_addres = socket.gethostbyname(url_socket)
 
     cprint(f'[*] Checking: {url}...', 'yellow')
@@ -71,7 +69,6 @@ try:
     print('')
     
     cprint("[*] Attempting to identify potential CMS...", 'yellow')
-
 
     # ------ CHECKING WORDPRESS ------ #
     cprint("[!] Running WordPress scans...", 'magenta')
@@ -120,7 +117,7 @@ try:
             confidence += 25
     else:
         cprint(f"    [-] Robots.txt not found", 'red')
-    
+    exit()
     # ------ CHECKING JOOMLA ------ #
     cprint("[!] Running Joomla scans...", 'magenta')
 
