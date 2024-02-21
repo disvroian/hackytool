@@ -60,6 +60,10 @@ try:
     else:
         url_request = 'http://' + url    
         url_socket = url
+        
+    response = requests.get('https://api.myip.com/', proxies=proxies)
+    print(response.json())
+    exit()
 
     r = requests.get(url_request, allow_redirects=True, headers=user_agent, proxies=proxies)
     IP_addres = socket.gethostbyname(url_socket)
