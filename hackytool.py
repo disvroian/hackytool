@@ -3,6 +3,7 @@ import socket
 import argparse
 from termcolor import cprint
 import os
+from bs4 import BeautifulSoup
 
 ######################## ARGUMENTS ########################
 
@@ -64,14 +65,31 @@ try:
     response = requests.get('https://api.myip.com/', proxies=proxies)
     print(response.json())
 
-    file1 = open('myfile.txt', 'r')
+
+    url = 'https://lagirafequivole.com/'
+    reqs = requests.get(url)
+    soup = BeautifulSoup(reqs.text, 'html.parser')
+ 
+    file1 = open('plugins', 'r')
     Lines = file1.readlines()
     for line in Lines:
-        response = requests.get('https://api.myip.com/', proxies=proxies)
+      urls = []
+      for link in soup.find_all('link'):
+        if line in link.get('href'):
+          print("OK ", link.get('href') )
+    exit(0)
+
+    file1 = open('plugins', 'r')
+    Lines = file1.readlines()
+    for line in Lines:
+        response = requests.get(url + line, proxies=proxies)
+        print(response.status_code, " ", url + line)
         if response.status_code == 200:
             response2 = requests.get('https://api.myip.com/', proxies=proxies)
             if response2.status_code == 200:
                 print("OK")
+        else:
+            print("KO " + line)
         
     exit()
 
